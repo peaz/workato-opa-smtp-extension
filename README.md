@@ -1,4 +1,4 @@
-Workato SMTP Extension
+# Workato SMTP Extension
 
 Current tested to support TLS-based SMTP connections only.
 
