@@ -24,10 +24,17 @@
       end,
 
       execute: lambda do |connection, input|
-        post("http://localhost/ext/#{connection['profile']}/sendEmail", input).headers('X-Workato-Connector': 'enforce')
+        response = post("http://localhost/ext/#{connection['profile']}/sendEmail", input).headers('X-Workato-Connector': 'enforce')
+        status = response.dig('status')
+        message = response.dig('message')
+        if status == "error"
+          error(message)
+        else
+          response
+        end
       end
     },
-    
+      
   },
 
   pick_lists: {

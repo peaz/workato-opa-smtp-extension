@@ -37,7 +37,7 @@ public class SMTPExtension {
         String subject = (String) body.get("subject");
         String emailBody = (String) body.get("emailBody");
         //String emailMimeType = (String) body.get("emailMimeType");
-        String error = "";
+        String errorMsg = "";
 
         String username = env.getProperty("username");
         String password = env.getProperty("password");
@@ -65,10 +65,17 @@ public class SMTPExtension {
 
             Transport.send(message);
         } catch (Exception e) {
-            error = e.getMessage();
+            errorMsg = e.toString();
+            e.printStackTrace();
         }
         
-        responseData.put("status","email sent successfully");
+        if (errorMsg.isEmpty()) {
+            responseData.put("status","success");
+            responseData.put("message","email sent successfully");
+        } else {
+            responseData.put("status","error");
+            responseData.put("message",errorMsg);
+        }        
         
         return responseData;
     }
