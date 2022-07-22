@@ -1,6 +1,7 @@
 # Workato SMTP Extension
 
-Current tested to work with Gmail's SMTP server using App Password credentions
+Current tested to work with Gmail's SMTP server using App Password credentials.
+This version supports plain text email only.
 
 ## Building extension
 
