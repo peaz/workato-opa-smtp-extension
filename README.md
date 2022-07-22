@@ -1,6 +1,6 @@
 # Workato SMTP Extension
 
-Current tested to support TLS-based SMTP connections only.
+Current tested to work with Gmail's SMTP server using App Password credentions
 
 ## Building extension
 
@@ -14,7 +14,8 @@ Steps to build an extension:
 
 1. Add a new directory called `ext` under Workato agent install directory.
 2. Copy the extension JAR file to `ext` directory. Pre-build jar: [workato-smtp-connector-0.1.jar](build/libs/workato-opa-smtp-extension-0.1.jar)
-3. Update the `config/config.yml` to add the `ext` file to class path.
+3. Also include the [javax.mail-1.6.2.jar](https://repo1.maven.org/maven2/com/sun/mail/javax.mail/1.6.2/javax.mail-1.6.2.jar) and [activation-1.1.jar](https://repo1.maven.org/maven2/javax/activation/activation/1.1/activation-1.1.jar) dependency to  the `ext` directory.
+4. Update the `config/config.yml` to add the `ext` file to class path.
 
 ```yml
 server:
@@ -28,8 +29,8 @@ extensions:
    smtp:
       controllerClass: com.knyc.opa.SMTPExtension
       username: 'smtp username'
-      password: 'smtp password / app-specific password'
-      host: 'smtp.hostname.com'
+      password: 'app-specific password'
+      host: 'smtp.gmail.com'
       port: '587'
 
 

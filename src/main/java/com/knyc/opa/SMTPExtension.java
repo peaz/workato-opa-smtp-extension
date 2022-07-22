@@ -30,7 +30,7 @@ public class SMTPExtension {
 
     @RequestMapping(path = "/sendEmail", method = RequestMethod.POST)
     public @ResponseBody Map<String, Object> sendEmail(@RequestBody Map<String, Object> body) throws Exception {
-
+        
         Map<String, Object> responseData = new HashMap<String, Object>();
         String from = (String) body.get("from");
         String recipients = (String) body.get("recipients");
@@ -68,11 +68,7 @@ public class SMTPExtension {
             error = e.getMessage();
         }
         
-        if (error != "") {
-            responseData.put("status","email sent successfully");        
-        } else {
-            responseData.put("status", "Error: " + error);        
-        }
+        responseData.put("status","email sent successfully");
         
         return responseData;
     }

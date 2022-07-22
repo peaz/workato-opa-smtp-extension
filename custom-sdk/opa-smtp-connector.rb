@@ -3,7 +3,7 @@
   secure_tunnel: true,
 
   connection: {
-    fields: [{ name: 'profile', hint: 'SMTP Connector' }],
+    fields: [{ name: 'profile', hint: 'SMTP profile name configured on OPA' }],
     authorization: { type: 'none'}
   },
 
@@ -23,8 +23,8 @@
         object_definitions['status']
       end,
 
-      execute: lambda do |connection|
-        get("http://localhost/ext/#{connection['profile']}/sendEmail").headers('X-Workato-Connector': 'enforce')
+      execute: lambda do |connection, input|
+        post("http://localhost/ext/#{connection['profile']}/sendEmail", input).headers('X-Workato-Connector': 'enforce')
       end
     },
     
