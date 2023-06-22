@@ -1,9 +1,10 @@
 /*
- * Copyright (c) 2018 Ken Ng, Inc. All rights reserved.
+ * Copyright (c) 2023 Ken Ng, Inc. All rights reserved.
  */
 
 package com.knyc.opa;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,17 +16,13 @@ import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
-
-import javax.inject.Inject;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 
 @Controller
 public class SMTPExtension {
 
-    @Inject
+    @Autowired
     private Environment env;
 
     @RequestMapping(path = "/sendEmail", method = RequestMethod.POST)
@@ -46,7 +43,7 @@ public class SMTPExtension {
             prop.put("mail.smtp.auth", "true");
             prop.put("mail.smtp.starttls.enable", "true");
             prop.put("mail.smtp.host", env.getProperty("host"));
-            prop.put("mail.smtp.port", env.getProperty("port"));
+            prop.put("mail.smtp.port", Integer.parseInt(env.getProperty("port")));
         
         Session session = Session.getInstance(prop, new Authenticator() {
             @Override
