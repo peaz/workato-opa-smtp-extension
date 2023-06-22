@@ -1,4 +1,6 @@
 .gradle
 .vscode
+.DS_Store
+build/.DS_Store
 build/classes/main/com/knyc/opa
 build/tmp
